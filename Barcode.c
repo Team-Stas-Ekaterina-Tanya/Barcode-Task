@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "Barcode.h"
 
 /* Gets a number  */
@@ -34,4 +35,26 @@ void printBarcode(t_Barcode *b){
     for(int i = 0; i < b->N; i++) {
         printf("%.2lf ", (b->data[i]));
     }
+}
+
+void processData(t_Barcode *b, char *code){
+    
+    for (int i = 0; i < b->N ; i++){
+        if( b->data[i] == 0 && b->data[i+1] == 0){
+            strcat(code,"1");
+            i+=2;
+        }
+
+        if (b->data[i] == 0 && b->data[i+1] != 0){
+            strcat(code,"0");
+            i+=1;
+        }
+
+        if (b->data[i] == 1){
+            continue;
+        }
+    
+    }
+    //printf("\n%s",code);
+    
 }
