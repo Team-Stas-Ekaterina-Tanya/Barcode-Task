@@ -38,16 +38,23 @@ void printBarcode(t_Barcode *b){
 }
 
 void processData(t_Barcode *b, char *code){
-    
+    int counter = 0;
+
     for (int i = 0; i < b->N ; i++){
+        if (counter == 5){
+            strcat(code, " ");
+            counter = 0;
+        }
         if( b->data[i] == 0 && b->data[i+1] == 0){
             strcat(code,"1");
             i+=2;
+            counter++;
         }
 
         if (b->data[i] == 0 && b->data[i+1] != 0){
             strcat(code,"0");
             i+=1;
+            counter++;
         }
 
         if (b->data[i] == 1){
