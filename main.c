@@ -5,15 +5,16 @@
 int main() {
     t_Barcode *barcode = initializeBarcode();
     roundData(barcode);
-    printBarcode(barcode);
+    //printBarcode(barcode);
 
     char *byteCode;
     byteCode[0] = '\0';
     processData(barcode, byteCode);
     //processData(barcode);
     // printf("The barcode is:\n");
-    printf("\n%s",byteCode);
-    
+    //printf("\n%s",byteCode);
+    //printf("\n%c\n",decodeSymbol("00100"));
+    decodeBarcode(byteCode);
 
 
 
