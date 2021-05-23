@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/komi/CodeCademy/Barcode-Task/build",
+  "command": "/mnt/c/mingw-w64/mingw64/bin/x86_64-w64-mingw32-gcc.exe  -I/home/komi/CodeCademy/Barcode-Task/inc  -g   -std=c11 -o CMakeFiles/barcode_scanner.dir/src/main.c.o   -c /home/komi/CodeCademy/Barcode-Task/src/main.c",
+  "file": "/home/komi/CodeCademy/Barcode-Task/src/main.c"
+},
+{
+  "directory": "/home/komi/CodeCademy/Barcode-Task/build",
+  "command": "/mnt/c/mingw-w64/mingw64/bin/x86_64-w64-mingw32-gcc.exe  -I/home/komi/CodeCademy/Barcode-Task/inc  -g   -std=c11 -o CMakeFiles/barcode_scanner.dir/src/Barcode.c.o   -c /home/komi/CodeCademy/Barcode-Task/src/Barcode.c",
+  "file": "/home/komi/CodeCademy/Barcode-Task/src/Barcode.c"
+}
+]

@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/barcode_scanner.dir/src/main.c.o CMakeFiles/barcode_scanner.dir/src/Barcode.c.o  -o barcode_scanner 

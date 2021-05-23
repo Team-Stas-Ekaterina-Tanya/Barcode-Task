@@ -1,32 +1,28 @@
-#include <stdio.h>
-#include "Barcode.h"
+#include "../inc/Barcode.h"
 #define STR_SIZE 50
 
-//#include "helper_func.c"
-
 int main() {
-    t_Barcode *barcode = initializeBarcode();
-    roundData(barcode);
-    // printBarcode(barcode);
-
     char *byteCode;
     char *result;
-    
-    byteCode[0] = '\0';
-    result[0] = '\0';
-    processData(barcode, byteCode);
+
+    t_Barcode *barcode = initializeBarcode();
+    roundData(barcode);
+
+    byteCode = processData(barcode);
     //processData(barcode);
     // printf("The barcode is:\n");
-    //printf("\n%s",byteCode);
+    printf("\n%s\n", byteCode);
+    // printf("%s",decodeSymbol("00110"));
     //printf("\n%c\n",decodeSymbol("00100"));
-    decodeBarcode(byteCode, result);
+    // decodeBarcode(byteCode, result);
     printf("str: %s", result);
     
     //decodeBarcode(byteCode,result);
     //char *test = decodeSymbol("10001");
     //printf("%s",test);
-
-
+    
+    result = decodeBarcode(byteCode);
+    printf("%s", result);
 
     // printf("Barcode truncated. Move the scanner to the left.");
     
