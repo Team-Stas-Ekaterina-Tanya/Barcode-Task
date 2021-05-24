@@ -26,11 +26,21 @@ t_Barcode* initializeBarcode(void) {
 /* Take a barcode as arguement and round all values in the data arrya to 0s and 1s */
 void roundData(t_Barcode *barcode) {
     for (int i = 0; i < barcode->N; i++) {
-        barcode->scannedData[i] = ((barcode->scannedData[i] >= 0 && barcode->scannedData[i] <= 0.5) ? 0 : 1);
+        if (barcode->scannedData[i] < 0.49)
+        {
+           if (barcode->scannedData[i] > 0.45)
+           {
+               barcode->scannedData[i]=(barcode->scannedData[i - 1] < 0.49 && barcode->scannedData[i + 1] < 0.49) ? 1 : 0;
+            } else {
+                barcode->scannedData[i] = 0;
+            }
+        } else {
+            barcode->scannedData[i] = 1;
+        }
+        printf("%.2f ",barcode->scannedData[i]);
     }
 } 
-
-/* Takes a barcode and an empty string as input. Stores the processed barcode data as a string of numbers (bits) */
+//Takes a barcode and an empty string as input. Stores the processed barcode data as a string of numbers (bits) 
 void processData(t_Barcode *b) {
     int counter = 0;
     char str[64];
@@ -59,7 +69,21 @@ void processData(t_Barcode *b) {
         }
     }
     strcpy(b->bitCode,str);
+    printf("bitcode: %s", b->bitCode);
 }
+
+bool isValid(t_Barcode *b)
+{
+    if ((startsWith("00110", b->bitCode)) || (startsWith("00110", strrev(b->bitCode)))) {
+        printf("Starts with start \n");
+        return true;
+    }
+    else {
+        printf("Invalid barcode\n");
+        return false;
+        }
+}
+
 
 void decodeBarcode (t_Barcode *b) {
     char * token = strtok(b->bitCode, " ");
@@ -134,26 +158,28 @@ void printBarcode(t_Barcode *b)
         printf("Invalid barcode\n");
     }
 }
-
-const char decodeSymbol(char *str) {
-    int i;
-    char buff;
-    char *arr[] = {"00001", "10001", "01001", "11001", "00101", "10100", "01100", "00011", "10010", "10000", "00100", "00110"};
-
-    for (i = 0; i <= 11; i++) {
-        if (!(strcmp(str, arr[i]))) {
-            if (i < 10) {
-                buff = i + '0';                
-                return buff;
-            } else if (i == 10) {
-                return '-';
-            } else if (i == 11) {
-                return 's';
+/*
+void printBarcode(t_Barcode *b)
+{
+    int length = strlen(b->finalCode);
+    //if(isValidBarcode(b))
+   // {
+        printf("Validate final barcode: \n");
+        for (int i = 0; i < length - 3; i++)
+        {
+            if (b->finalCode[i] == 's')
+            {
+                continue;
+            } else {
+                printf("%c", b->finalCode[i]);
             }
         }
-    }
+    //}
+    //else{
+    //    printf("Invalid barcode\n");
+    //}
 }
-
+*/
 void deinit(t_Barcode *b) {
     free(b->scannedData);
     free(b->bitCode);

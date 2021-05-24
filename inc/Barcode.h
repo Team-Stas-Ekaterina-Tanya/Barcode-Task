@@ -17,6 +17,6 @@ void roundData(t_Barcode *barcode);
 void printBarcode(t_Barcode *b);
 void processData(t_Barcode *b);
 void decodeBarcode(t_Barcode *b);
-const char decodeSymbol(char *str);
 bool isValidBarcode(t_Barcode *b);
+bool isValid(t_Barcode *b);
 void deinit(t_Barcode *b);
