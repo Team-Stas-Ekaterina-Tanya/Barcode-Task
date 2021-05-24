@@ -67,32 +67,81 @@ void processData(t_Barcode *b) {
 }
 
 void decodeBarcode (t_Barcode *b) {
-    // char *result = (char *)malloc(BARCODESIZE * sizeof(char));
     char * token = strtok(b->bitCode, " ");
-    //char *str = (char *)malloc(sizeof(char));
     char str[128];
-    str[0] = decodeSymbol(token);
-    /**str = decodeSymbol(token);
-    
-    str++;*/
-    printf("str!!! %s\n", str);
-    int i = 1;
-    
-    while(token != NULL) {     
-        token = strtok(NULL, " ");
-        // printf("tiktok: %s\n", token);
-        // printf("%c\n", decodeSymbol(token));
-        //strcat(str, decodeSymbol(token));
-        //
-        str[i] = decodeSymbol(token);
-        i++;
-    }
-    str[i] = '\0';
+    int count = 0;
 
+    for (count = 0; token != NULL ; count++) {
+        str[count] = decodeSymbol(token);
+        token = strtok(NULL, " ");
+    }
+
+    str[count] = '\0';
+    
     printf("str: %s\n", str);
-    //strcpy(b->finalCode, str);
-    //printf("str: %s\n", str);
-    // printf("final: %s\n", b->finalCode);
+    int length = count;
+    printf("length: %d\n", length);
+    int arr[length];
+
+    for (int i = 0; i < length; i++)
+    {
+        if(str[i] == 's')
+        {
+            arr[i] = 11;
+        } else if (str[i] == '-'){
+            arr[i] = 10;
+        } else {
+            arr[i] = str[i] - 48;
+        }
+    }
+
+    for (int i = 0; i < length; i++){
+        printf("arr:%d\n",arr[i]);
+    }
+
+    for (int i = 0; i < length; i++){
+        if(arr[i] == 11)
+        {
+            deleteElement(arr,length,arr[i]);
+        }
+    }
+
+    findCsymbol(arr, length - 1);
+    findKSymbol(arr, length-1);
+
+    // strcpy(b->finalCode, str);
+
+    /*
+    int length = --i;
+    int arr[length];
+    printf("length: %d\n",length);
+    
+    for (int i = 0, j = 0; i < length; i++){
+        if (str[i] == 's') {
+            //str[i] = str[i+1];
+            length--;
+            continue;
+        }
+
+        if (str[i] == '-'){
+            arr[j] = 10;
+            j++;
+        } else {
+            arr[j] = str[i] - 48;
+            j++;
+        }
+
+        
+    }
+
+    for(int i = 0; i < length; i++){
+        printf("arr:%d\n",arr[i]);
+    }
+
+    printf("C symb: %d\t", findCSymbol(arr, length));
+    printf("K symb: %d\t\n", findKSymbol(arr, length));
+    */
+    
 }
 
 const char decodeSymbol(char *str) {

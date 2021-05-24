@@ -4,8 +4,10 @@ int main() {
     t_Barcode *barcode = initializeBarcode();
     roundData(barcode);
     processData(barcode);
-    decodeBarcode(barcode);
     printBarcode(barcode);
+
+    decodeBarcode(barcode);
+    // printBarcode(barcode);
     deinit(barcode);
     return 0;
 }
