@@ -37,7 +37,7 @@ void roundData(t_Barcode *barcode) {
         } else {
             barcode->scannedData[i] = 1;
         }
-        printf("%.2f ",barcode->scannedData[i]);
+        //printf("%.2f ",barcode->scannedData[i]);
     }
 } 
 //Takes a barcode and an empty string as input. Stores the processed barcode data as a string of numbers (bits) 
@@ -69,13 +69,13 @@ void processData(t_Barcode *b) {
         }
     }
     strcpy(b->bitCode,str);
-    printf("bitcode: %s", b->bitCode);
+    //printf("bitcode: %s", b->bitCode);
 }
 
 bool isValid(t_Barcode *b)
 {
     if ((startsWith("00110", b->bitCode)) || (startsWith("00110", strrev(b->bitCode)))) {
-        printf("Starts with start \n");
+        //printf("Starts with start \n");
         return true;
     }
     else {
@@ -101,7 +101,7 @@ void decodeBarcode (t_Barcode *b) {
 
 bool isValidBarcode(t_Barcode *b) {
     int length = strlen(b->finalCode);
-    printf("length: %d\n",length);
+    //printf("length: %d\n",length);
     int *arr= malloc(length * sizeof(int));
     for (int i = 0, j = 0; i <= length; i++)
     {
@@ -115,24 +115,24 @@ bool isValidBarcode(t_Barcode *b) {
         } else {
             length--;
         }
-    }
+    }/*
     printf("lengtj: %d\n", length); 
     printf("Origin barcode: \n");
     for(int i = 0 ; i < length; i++)
     {
         printf("%d", arr[i]);
     }
-
+   
     
     printf("\n");
     printf("C symb: %d\t", findCSymbol(arr, (length - 2)));
     printf("K symb: %d\t\n", findKSymbol(arr, (length - 2)));
-
+    */
     char c = findCSymbol(arr, (length - LEN_WITHOUT_K)) + '0';
     char k = findKSymbol(arr, (length - LEN_WITHOUT_K)) + '0';
 
     if ( c == b->finalCode[strlen(b->finalCode) - LEN_WITHOUT_C] && k == b->finalCode[strlen(b->finalCode) - LEN_WITHOUT_K]){
-        printf("TRUE");
+        //printf("TRUE");
         return true;
     }
     return false;
@@ -143,7 +143,7 @@ void printBarcode(t_Barcode *b)
     int length = strlen(b->finalCode);
     if(isValidBarcode(b))
     {
-        printf("Validate final barcode: \n");
+        //printf("Validate final barcode: \n");
         for (int i = 0; i < length - 3; i++)
         {
             if (b->finalCode[i] == 's')
