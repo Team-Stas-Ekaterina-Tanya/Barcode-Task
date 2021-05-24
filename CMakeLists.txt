@@ -11,9 +11,12 @@ set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_executable(
     ${PROJECT_NAME}
         ${INC_DIR}/Barcode.h
+        ${INC_DIR}/HelperFunctions.h
+        ${INC_DIR}/Defines.h
         
         ${SRC_DIR}/main.c
         ${SRC_DIR}/Barcode.c
+        ${SRC_DIR}/HelperFunctions.c
 )
 
 target_include_directories(

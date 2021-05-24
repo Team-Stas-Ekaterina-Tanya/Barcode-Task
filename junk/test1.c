@@ -3,7 +3,6 @@
 char *itoa(int i, char *str){
     str[0] = i + '0';
     str[1] = '\0';
-
     return str;
 }
 int main(){

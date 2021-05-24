@@ -1,8 +1,14 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/barcode_scanner.dir/src/Barcode.c.o"
-  "CMakeFiles/barcode_scanner.dir/src/main.c.o"
-  "barcode_scanner"
+  "CMakeFiles/barcode_scanner.dir/src/Barcode.c.obj"
+  "CMakeFiles/barcode_scanner.dir/src/Barcode.c.obj.d"
+  "CMakeFiles/barcode_scanner.dir/src/HelperFunctions.c.obj"
+  "CMakeFiles/barcode_scanner.dir/src/HelperFunctions.c.obj.d"
+  "CMakeFiles/barcode_scanner.dir/src/main.c.obj"
+  "CMakeFiles/barcode_scanner.dir/src/main.c.obj.d"
+  "barcode_scanner.exe"
+  "barcode_scanner.exe.manifest"
   "barcode_scanner.pdb"
+  "libbarcode_scanner.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.
