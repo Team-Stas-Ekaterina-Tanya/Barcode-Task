@@ -1,3 +1,0 @@
-C:/Users/user/Barcode-Task/build/CMakeFiles/barcode_scanner.dir
-C:/Users/user/Barcode-Task/build/CMakeFiles/edit_cache.dir
-C:/Users/user/Barcode-Task/build/CMakeFiles/rebuild_cache.dir
