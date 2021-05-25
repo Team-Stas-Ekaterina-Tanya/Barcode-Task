@@ -1,4 +1,6 @@
 #include "../inc/HelperFunctions.h"
+
+/* Calculate the value of the C symbol */
 int findCSymbol(int *arr, int n) {
     int sum = 0;
 
@@ -9,6 +11,7 @@ int findCSymbol(int *arr, int n) {
     return (sum %= 11);
 }
 
+/* Calculate the value of the K symbol */
 int findKSymbol(int *arr, int n) {
     int sum = 0;
     
@@ -19,6 +22,7 @@ int findKSymbol(int *arr, int n) {
     return (sum %= 11);
 }
 
+/* Decode the 5bit chunks into barcode digits and symbols */
 const char decodeSymbol(char *str) {
     int i;
     char buff;
@@ -38,6 +42,7 @@ const char decodeSymbol(char *str) {
     }
 }
 
+/* Checks if a string starts with another string */
 bool startsWith(const char *pre, const char *str)
 {
     size_t lenpre = strlen(pre),

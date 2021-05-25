@@ -8,7 +8,6 @@ int main() {
     decodeBarcode(barcode);
     printBarcode(barcode);
     deinit(barcode);
+
     return 0;
 }
-
-/* "00001", "10001", , "11001", "00101" */

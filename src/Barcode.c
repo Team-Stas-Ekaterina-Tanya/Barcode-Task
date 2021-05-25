@@ -1,5 +1,4 @@
-#include <math.h>
-#include <string.h>
+//#include <string.h>
 
 #include "Barcode.h"
 #include "HelperFunctions.h"
@@ -7,18 +6,35 @@
 /* Initialize a new barcode structure */
 t_Barcode* initializeBarcode(void) {
     t_Barcode *new_barcode = (t_Barcode *)malloc(sizeof(t_Barcode));
+    if (new_barcode == NULL) {
+        printf("initializeBarcode: Memory not allocated\n");
+        exit(1);
+    }
     
     scanf(" %d", &new_barcode->N);
     new_barcode->scannedData = malloc(new_barcode->N * sizeof(double));
+    if (new_barcode->scannedData == NULL) {
+        printf("initializeBarcode: Memory not allocated\n");
+        exit(1);
+    }
 
     for (int i = 0; i < new_barcode->N; i++) {
         scanf(" %lf", &new_barcode->scannedData[i]);
     }
     
     new_barcode->bitCode = (char *)malloc(BITCODE_SIZE * sizeof(char));
+    if (new_barcode->bitCode == NULL) {
+        printf("initializeBarcode: Memory not allocated\n");
+        exit(1);
+    }
+    
     new_barcode->bitCode[0] = '\0';
     
     new_barcode->finalCode = (char *)malloc(FINAL_CODE * sizeof(char));
+    if (new_barcode->finalCode == NULL) {
+        printf("initializeBarcode: Memory not allocated\n");
+        exit(1);
+    }
 
     return new_barcode;
 }
@@ -40,7 +56,8 @@ void roundData(t_Barcode *barcode) {
         //printf("%.2f ",barcode->scannedData[i]);
     }
 } 
-//Takes a barcode and an empty string as input. Stores the processed barcode data as a string of numbers (bits) 
+
+/*Takes a barcode and an empty string as input. Stores the processed barcode data as a string of numbers (bits) */
 void processData(t_Barcode *b) {
     int counter = 0;
     char str[64];
@@ -71,7 +88,7 @@ void processData(t_Barcode *b) {
     strcpy(b->bitCode,str);
     //printf("bitcode: %s", b->bitCode);
 }
-
+/* Checks that bitcode starts with start/stop */
 bool isValid(t_Barcode *b)
 {
     if ((startsWith("00110", b->bitCode)) || (startsWith("00110", strrev(b->bitCode)))) {
@@ -84,7 +101,7 @@ bool isValid(t_Barcode *b)
         }
 }
 
-
+/* Separate the bitcode into 5bit chunks */
 void decodeBarcode (t_Barcode *b) {
     char * token = strtok(b->bitCode, " ");
     char str[SCANNED_DATA_SIZE];
@@ -99,10 +116,18 @@ void decodeBarcode (t_Barcode *b) {
     strcpy(b->finalCode,str);
 }
 
+/*  Check the validity of the final barcode and the C and K symbols */
 bool isValidBarcode(t_Barcode *b) {
     int length = strlen(b->finalCode);
     //printf("length: %d\n",length);
+
     int *arr= malloc(length * sizeof(int));
+
+    if (arr == NULL) {
+        printf("isValidBarcode: Memory not allocated\n");
+        exit(1);
+    }
+
     for (int i = 0, j = 0; i <= length; i++)
     {
         if (b->finalCode[i] >= '0' && b->finalCode[i] <= '9'){
@@ -132,7 +157,6 @@ bool isValidBarcode(t_Barcode *b) {
     char k = findKSymbol(arr, (length - LEN_WITHOUT_K)) + '0';
 
     if ( c == b->finalCode[strlen(b->finalCode) - LEN_WITHOUT_C] && k == b->finalCode[strlen(b->finalCode) - LEN_WITHOUT_K]){
-        //printf("TRUE");
         return true;
     }
     return false;
@@ -143,7 +167,6 @@ void printBarcode(t_Barcode *b)
     int length = strlen(b->finalCode);
     if(isValidBarcode(b))
     {
-        //printf("Validate final barcode: \n");
         for (int i = 0; i < length - 3; i++)
         {
             if (b->finalCode[i] == 's')
@@ -158,28 +181,7 @@ void printBarcode(t_Barcode *b)
         printf("Invalid barcode\n");
     }
 }
-/*
-void printBarcode(t_Barcode *b)
-{
-    int length = strlen(b->finalCode);
-    //if(isValidBarcode(b))
-   // {
-        printf("Validate final barcode: \n");
-        for (int i = 0; i < length - 3; i++)
-        {
-            if (b->finalCode[i] == 's')
-            {
-                continue;
-            } else {
-                printf("%c", b->finalCode[i]);
-            }
-        }
-    //}
-    //else{
-    //    printf("Invalid barcode\n");
-    //}
-}
-*/
+
 void deinit(t_Barcode *b) {
     free(b->scannedData);
     free(b->bitCode);
