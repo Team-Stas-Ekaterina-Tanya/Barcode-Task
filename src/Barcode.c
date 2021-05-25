@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "Barcode.h"
-#include "HelperFunctions.h".
+#include "HelperFunctions.h"
 
 /* Initialize a new barcode structure */
 t_Barcode* initializeBarcode(void) {
