@@ -1,3 +1,0 @@
-/home/komi/CodeCademy/Barcode-Task/CMakeFiles/rebuild_cache.dir
-/home/komi/CodeCademy/Barcode-Task/CMakeFiles/edit_cache.dir
-/home/komi/CodeCademy/Barcode-Task/CMakeFiles/barcode_scanner.dir
